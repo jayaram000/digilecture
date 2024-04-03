@@ -1,0 +1,79 @@
+{% include '../components/header.html' %}
+{% include '../components/usernav.html' %}
+
+<div class="container w-full min-h-fit px-12 py-4">
+    <div class="container w-full bg-gradient-to-r from-sky-500 to-violet-400 px-6 py-4 rounded-xl pb-10">
+        <p class="text-white font-bold text-3xl capitalize">{{user.username}}</p>
+        <p class="text-white font-bold text-xl opacity-75">{{user.email}}</p>
+
+        {% if not profileDetails %}
+        <form action="" method="post" class="my-6 flex gap-8">
+            {% csrf_token %}
+            <input type="text" name="college" class="bg-transparent focus:outline-none border-b-2 text-white px-2 py-1 placeholder-slate-200 rounded" placeholder="college/school..." required>
+            <input type="text" name="designation" class="bg-transparent focus:outline-none border-b-2 text-white px-2 py-1 placeholder-slate-200 rounded" placeholder="designation..." required>
+            <input type="checkbox" name="isPrivate" id="isPriavte" value="True" class="w-4 border-white" required>
+            <input type="submit" value="Add Details" class="bg-transparent focus:outline-none underline cursor-pointer text-white px-2 py-1 placeholder-slate-200 rounded" placeholder="designation...">
+        </form>
+        {% else %}
+        <p class="text-white font-bold text-xl mt-4">School/College : {{profileDetails.college}}</p>
+        <p class="text-white font-bold text-xl mb-4 capitalize">Designation : {{profileDetails.designation}}</p>
+        {% endif %}
+
+        {% if profileDetails.isPrivate %}
+        <p class="text-white font-bold text-xl mb-4 capitalize opacity-75">private profile</p>
+        {% else %}
+        <p class="text-white font-bold text-xl mb-4 capitalize opacity-75">public profile</p>
+        {% endif %}
+
+        <a href="{% url 'updateuserprofile' user.username %}" class="text-white rounded-full px-6 py-2 font-bold bg-emerald-500 hover:bg-emerald-700">Edit Profile</a>
+
+    </div>
+    <div class="container md:flex block gap-10 mt-10">
+
+        <div class="w-full mb-10">
+            <p class="text-slate-600 text-center text-2xl font-bold uppercase">uploaded notes</p>
+            <table class="table-auto w-full text-slate-600">
+                <thead>
+                    <tr class="border-b border-white border-collapse text-left">
+                        <th class="py-4 px-3">#</th>
+                        <th class="py-4 px-3">Note Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in notes %}
+                    <tr class="border-b border-white border-collapse">
+                        <td class="py-4 px-3">{{i.id}}</td>
+                        <td class="py-4 px-3">{{i.subject}}</td>
+                        <td class="py-4 px-3"><a href="{% url 'viewnote' i.id %}" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+            
+        <div class="w-full mb-10">
+            <p class="text-slate-600 text-center text-2xl font-bold uppercase">uploaded books</p>
+            <table class="table-auto w-full text-slate-600">
+                <thead>
+                    <tr class="border-b border-white border-collapse text-left">
+                        <th class="py-4 px-3">#</th>
+                        <th class="py-4 px-3">Book Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in books %}
+                    <tr class="border-b border-white border-collapse">
+                        <td class="py-4 px-3">{{i.id}}</td>
+                        <td class="py-4 px-3">{{i.title}}</td>
+                        <td class="py-4 px-3"><a href="{% url 'viewbook' i.id %}" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+    
+
+{% include '../components/footer.html' %}

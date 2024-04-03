@@ -1,0 +1,35 @@
+{% include '../components/header.html' %}
+
+
+
+<div class="container w-full min-h-fit px-12 py-40">
+    <a href="javascript:history.back()" class="bg-transparent border-2 border-sky-500  hover:bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-sky-500 hover:text-white rounded-full hover:shadow-lg">Back</a>
+
+    <div class="container w-full bg-gradient-to-r from-sky-500 to-violet-400 px-6 py-4 rounded-xl pb-10 mt-10">
+        <p class="text-white font-bold text-3xl capitalize">{{user.username}}</p>
+        <p class="text-white font-bold text-xl opacity-75">{{user.email}}</p>
+
+        <form action="" method="post" class="my-6">
+            {% csrf_token %}
+            <div class="container flex flex-col gap-8 mb-8">
+                <input type="text" value="{{userProfile.college}}" name="college" class="w-80 bg-transparent focus:outline-none border-b-2 text-white px-2 py-1 placeholder-slate-200 rounded" placeholder="college/school..." required>
+                <input type="text" value="{{userProfile.designation}}" name="designation" class="w-80 bg-transparent focus:outline-none border-b-2 text-white px-2 py-1 placeholder-slate-200 rounded" placeholder="designation..." required>
+            </div>
+            {% if userProfile.isPrivate %}
+            <p class="text-white capitalize font-semibold">
+                private
+                <input type="checkbox" name="isPrivate" id="isPriavte" value="True" class="w-4 border-white mb-8" checked required>
+            </p>
+            {% else %}
+            <p class="text-white capitalize font-semibold">
+                private
+                <input type="checkbox" name="isPrivate" id="isPriavte" value="True" class="w-4 border-white mb-8" required>
+            </p>
+            {% endif %}
+            <input type="submit" value="Edit Details" class="bg-transparent focus:outline-none underline cursor-pointer text-white px-2 py-1 placeholder-slate-200 rounded" placeholder="designation...">
+        </form>
+
+    </div>
+</div>
+
+{% include '../components/footer.html' %}

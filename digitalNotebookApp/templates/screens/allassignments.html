@@ -1,0 +1,16 @@
+{% include '../components/header.html' %}
+{% include '../components/usernav.html' %}
+
+
+<div class="container flex md:flex-row gap-10 flex-col items-center justify-between pr-12">
+    <a href="uploadassignment" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg ml-12">Upload New Assignment</a>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="searchassignment" id="searchassignment" placeholder="search any assignments..." class="border-white rounded-xl px-6 py-2 focus:outline-none">
+        <input type="submit" value="Search" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg ml-6">
+    </form>
+</div>
+
+{% include '../components/assignmenttable.html' %}
+{% include '../components/footer.html' %}

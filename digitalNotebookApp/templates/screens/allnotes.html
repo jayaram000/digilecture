@@ -1,0 +1,19 @@
+{% include '../components/header.html' %}
+{% include '../components/usernav.html' %}
+
+
+<div class="container flex md:flex-row gap-10 flex-col items-center justify-between pr-12">
+    <a href="userhome" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg ml-12">Upload New Note</a>
+    {% if profile.isPrivate %}
+    <a href="noterequests" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg ml-12">View Requests</a>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="notesearch" id="notesearch" placeholder="search any notes..." class="border-white rounded-xl px-6 py-2 focus:outline-none">
+        <input type="submit" value="Search" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg ml-6">
+    </form>
+</div>
+
+{% include '../components/notestable.html' %}
+{% include '../components/footer.html' %}

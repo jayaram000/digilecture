@@ -1,0 +1,78 @@
+{% include '../components/header.html' %}
+{% include '../components/usernav.html' %}
+
+    <!-- new note and books section start -->
+    <div class="container w-100 px-12 flex gap-6 md:flex-row flex-col">
+
+        <!-- create new note section start -->
+        <div class="container md:w-1/2 w-full bg-gradient-to-r from-sky-500 to-violet-400 px-8 py-5 rounded-lg shadow-2xl">
+
+
+            {% if success %}
+            <p class="bg-gradient-to-r from-green-500 to-lime-300 w-full rounded-full px-6 py-3 my-6 text-white font-bold">{{ success }}</p>
+            {% endif %}
+
+
+            {% if draft %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="text-white text-2xl font-bold">Create New Note - {{user.username}}</h1>
+
+                <input type="text" value="{{draft.subject}}" name="subject" placeholder="Type subject here..." id="subject" class="text-slate-100 placeholder-slate-200 w-full bg-transparent border-2 border-white focus:outline-none focus:ring-0 rounded-lg px-3 py-1 mt-3">
+                <input type="file" value="{{draft.image.url}}" name="image" id="noteImage" class="w-100 bg-transparent text-white rounded-lg focus:outline-none px-3 py-1 mt-3">
+                <textarea name="note" id="note" cols="30" rows="6" class="text-slate-100 placeholder-slate-200 w-full bg-transparent border-2 border-white rounded-lg focus:outline-none focus:ring-0 px-3 py-1 mt-3" placeholder="Type notes here...">{{draft.note}}</textarea>
+                <input type="submit" value="Save as Draft" class="bg-gradient-to-r from-cyan-400 to-slate-300 px-8 py-3 rounded-full text-slate-600 font-bold hover:opacity-75 mt-4">
+                <a href="viewdrafts" class="block text-white underline my-4">view all drafts</a>
+            </form>
+            {% else %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="text-white text-2xl font-bold">Create New Note - {{user.username}}</h1>
+
+                <input type="text" name="subject" placeholder="Type subject here..." id="subject" class="text-slate-100 placeholder-slate-200 w-full bg-transparent border-2 border-white focus:outline-none focus:ring-0 rounded-lg px-3 py-1 mt-3">
+                <input type="file" name="image" id="noteImage" class="w-100 bg-transparent text-white rounded-lg focus:outline-none px-3 py-1 mt-3">
+                <textarea name="note" id="note" cols="30" rows="6" class="text-slate-100 placeholder-slate-200 w-full bg-transparent border-2 border-white rounded-lg focus:outline-none focus:ring-0 px-3 py-1 mt-3" placeholder="Type notes here..."></textarea>
+                <input type="submit" value="Save as Draft" class="bg-gradient-to-r from-cyan-400 to-slate-300 px-8 py-3 rounded-full text-slate-600 font-bold hover:opacity-75 mt-4">
+                <a href="viewdrafts" class="block text-white underline my-4">view all drafts</a>
+            </form>
+            {% endif %}
+        </div>
+        <!-- create new note section end -->
+
+        <!-- books section start  -->
+        <div class="container md:w-1/2 w-full px-8 py-5 rounded-lg border-2 border-slate-100">
+            <h1 class="text-slate-600 text-2xl font-semibold text-center mb-3">Latest Books...</h1>
+            <a href="allbooks" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg">View Books</a>
+
+            <div class="container h-80 flex gap-3 mb-5 mt-5">
+                {% for i in books %}
+                <div class="container md:w-1/3 w-full h-fit bg-gradient-to-br from-sky-500 to-violet-400 rounded-xl px-4 py-3 capitalize shadow-xl hover:shadow-2xl">
+                    <a href="{% url 'viewbook' i.id %}">
+                        <h1 class="font-bold text-2xl text-white">{{i.title}}</h1>
+                        <p class="font-semibold text-xl text-white opacity-50 mb-6">{{i.author}}</p>
+                        <img src="http://127.0.0.1:8000/static{{i.coverImage.url}}" class="rounded-full md:h-auto h-40 aspect-square py-3 mt-0" alt="">
+                    <!-- <a href="{% url 'viewbook' i.id %}" class="bg-gradient-to-r from-cyan-400 to-slate-300 px-8 py-3 rounded-full text-sm text-slate-800 font-bold hover:opacity-75">View Book</a> -->
+                    </a>
+                </div>
+                {% endfor %}
+                
+            </div>
+           
+        </div>
+        <!-- books section enc  -->
+
+    </div>
+    <!-- new note and books section end -->
+
+    <div class="container mx-12 mt-20 flex gap-10">
+        <div class="text-slate-600 font-bold text-3xl">
+            Notes
+            <span class="material-symbols-outlined">
+                arrow_downward
+            </span> 
+        </div>
+        <a href="allnotes" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg">View All Notes</a>
+    </div>
+
+{% include '../components/notestable.html' %}
+{% include '../components/footer.html' %}

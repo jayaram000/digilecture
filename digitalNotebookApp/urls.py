@@ -1,0 +1,36 @@
+from django.contrib import admin
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index),
+    path('loginpage', views.loginPage),
+    path('registerpage', views.registerPage),
+    path('logoutuser', views.logoutUser),
+    path('userhome', views.userHome),
+    path('allnotes', views.allNotes),
+    path('deletenote/<str:pk>', views.deleteNote, name='deletenote'),
+    path('viewdrafts', views.viewDrafts),
+    path('editdraft<str:pk>', views.editDraft, name='editdraft'),
+    path('savedraft/<str:pk>', views.saveDraft, name='savedraft'),
+    path('deletedraft/<str:pk>', views.deleteDraft, name='deletedraft'),
+    path('viewnote/<str:pk>', views.viewNote, name='viewnote'),
+    path('allbooks', views.allBooks),
+    path('uploadbook', views.uploadBook),
+    path('deletebook/<str:pk>', views.deleteBook, name='deletebook'),
+    path('viewbook/<str:pk>', views.viewBook, name='viewbook'),
+    path('publicnotes', views.publicNotes),
+    path('viewpublicnote/<str:pk>', views.viewPublicNote, name='viewpublicnote'),
+    path('userprofile', views.userProfile),
+    path('payforbook/<str:pk>', views.payForBook, name='payforbook'),
+    path('bookpaymentrequests', views.bookPaymentRequests),
+    path('acceptbookpayment/<str:pk>', views.acceptBookPayment, name='acceptbookpayment'),
+    path('rejectbookpayment/<str:pk>', views.rejectBookPayment, name='rejectbookpayment'),
+    path('updateuserprofile/<str:pk>', views.updateUserProfile, name='updateuserprofile'),
+    path('uploadassignment', views.uploadAssignment),
+    path('allassignments', views.allAssignments),
+    path('noteviewrequest/<str:pk>', views.noteViewRequest, name='noteviewrequest'),
+    path('noterequests',views.noteRequests),
+    path('acceptnoterequest<str:pk>', views.acceptNoteRequest, name='acceptnoterequest'),
+    path('rejectnoterequest<str:pk>', views.rejectNoteRequest, name='rejectnoterequest'),
+]

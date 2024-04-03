@@ -1,0 +1,19 @@
+{% include '../components/header.html' %}
+
+<div class="container mx-12 my-10">    
+    <a href="javascript:history.back()" class="bg-transparent border-2 border-sky-500  hover:bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-sky-500 hover:text-white rounded-full hover:shadow-lg">Back</a>
+</div>
+
+<div class="container mx-12 flex gap-10 max-w-screen md:flex-row flex-col">
+    <img src="http://127.0.0.1:8000/static{{note.image.url}}" alt="note image" class="h-1/2 w-1/2">
+    <div class="container w-1/3">
+        <h1 class="text-3xl text-slate-600 uppercase font-bold mb-3">{{note.subject}}</h1>
+        <p class="text-xl text-slate-600 font-semibold capitalize opacity-75 mb-8">written by : {{note.author}}</p>
+        <a href="../loginpage"><p class="text-lg text-slate-600 opacity-75 my-4 underline">Click here to view full note...</p></a>
+
+        <p class="text-lg text-slate-600 font-semibold capitalize opacity-75 mt-8">Uploaded on : {{note.time}}</p>
+
+    </div>
+</div>
+
+{% include '../components/footer.html' %}

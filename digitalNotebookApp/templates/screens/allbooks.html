@@ -1,0 +1,35 @@
+{% include '../components/header.html' %}
+{% include '../components/usernav.html' %}
+
+
+<div class="container flex gap-6 items-center mb-10">
+    <h1 class="text-3xl text-slate-600 font-bold capitalize my-10 m-12">all books</h1>
+    <a href="uploadbook" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg h-fit">Upload Book</a>
+</div>
+
+
+<form action="" method="POST" class="ml-12 mb-10">
+    {% csrf_token %}
+    <input type="text" name="booksearch" id="booksearch" placeholder="search by title or author..." class="border-white rounded-xl px-6 py-2 focus:outline-none">
+    <input type="submit" value="Search" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg ml-6">
+</form>
+
+
+<div class="container max-w-screen px-12 flex gap-10 flex-wrap mb-10">
+    {% if not books %}
+    <h1 class="text-white text-4xl font-bold uppercase mx-auto my-40">No Books Found...</h1>
+    {% endif %}
+    {% for i in books %}
+    <div class="container md:w-1/6 w-full bg-gradient-to-br from-sky-500 to-violet-400 rounded-xl px-4 py-3 shadow-xl hover:shadow-2xl">
+    <a href="{% url 'viewbook' i.id %}">
+        <h1 class="font-bold text-2xl text-white">{{i.title}}</h1>
+        <p class="font-semibold text-xl text-white opacity-50 mb-6">{{i.author}}</p>
+        <!-- <a href="{% url 'viewbook' i.id %}" class="bg-gradient-to-r from-cyan-400 to-slate-300 px-8 py-3 rounded-full text-slate-800 font-bold hover:opacity-75">View Book</a> -->
+        <img src="http://127.0.0.1:8000/static{{i.coverImage.url}}" class="rounded-full h-60 py-4 mt-3" alt="">
+    </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% include '../components/footer.html' %}

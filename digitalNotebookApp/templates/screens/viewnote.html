@@ -1,0 +1,40 @@
+{% include '../components/header.html' %}
+
+<div class="container mx-12 my-10">    
+    <a href="javascript:history.back()" class="bg-transparent border-2 border-sky-500  hover:bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-sky-500 hover:text-white rounded-full hover:shadow-lg">Back</a>
+</div>
+
+<div class="container mx-12 flex gap-10 max-w-screen md:flex-row flex-col">
+    <img src="http://127.0.0.1:8000/static{{note.image.url}}" alt="note image" class="h-1/2 w-1/2">
+    <div class="container w-1/3">
+        <h1 class="text-3xl text-slate-600 uppercase font-bold mb-3">{{note.subject}}</h1>
+        <p class="text-xl text-slate-600 font-semibold capitalize opacity-75 mb-8">written by : {{note.author}}</p>
+        {% if note.author == user.username %}
+        <a href="{% url 'deletenote' note.id %}" class="bg-gradient-to-r from-red-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg">Delete Note</a>
+        {% endif %}
+
+
+        {% if noteIsPrivate and note.author != user.username and requestMade.approved == False %}
+        <p class="text-2xl text-slate-600 opacity-75 my-4 break-normal">
+            The note cannot be viewed since it is private... send a request 
+            <a href="{% url 'noteviewrequest' note.id %}" class="underline">here...</a>
+        </p>
+        {% elif noteIsPrivate == False %}
+        <p class="text-lg text-slate-600 opacity-75 my-4 break-normal">{{note.note}}</p>
+        {% endif %}
+        
+        {% if requestMade is not None %}
+            {% if requestMade.approved %}
+                <p class="text-lg text-slate-600 opacity-75 my-4 break-normal">{{note.note}}</p>
+            {% else %}
+                <p class="text-lg text-red-600 opacity-75 my-4 break-normal">Request sent... Please wait for approval</p>
+            {% endif %}
+        {% endif %}
+
+
+        <p class="text-lg text-slate-600 font-semibold capitalize opacity-75 mt-8">Uploaded on : {{note.time}}</p>
+
+    </div>
+</div>
+
+{% include '../components/footer.html' %}

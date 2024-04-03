@@ -1,0 +1,26 @@
+   <!-- all notes table section start -->
+   <div class="container w-100 my-10 px-12">
+    <table class="table-auto w-full text-slate-600">
+        <thead>
+            <tr class="border-b border-white border-collapse text-left">
+                <th class="py-4 px-3">#</th>
+                <th class="py-4 px-3">Subject</th>
+                <th class="py-4 px-3">By</th>
+                <th class="py-4 px-3">Uploaded On</th>
+                <th class="py-4 px-3"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in notes %}
+            <tr class="border-b border-white border-collapse">
+                <td class="py-4 px-3">{{i.id}}</td>
+                <td class="py-4 px-3">{{i.subject}}</td>
+                <td class="py-4 px-3">{{i.author}}</td>
+                <td class="py-4 px-3">{{i.time}}</td>
+                <td class="py-4 px-3"><a href="{% url 'viewpublicnote' i.id %}" class="bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-white rounded-full hover:shadow-lg">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- all notes table section end -->

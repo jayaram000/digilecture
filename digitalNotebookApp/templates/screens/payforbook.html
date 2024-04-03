@@ -1,0 +1,22 @@
+{% include '../components/header.html' %}
+
+<div class="container mx-12 my-10">    
+    <a href="javascript:history.back()" class="bg-transparent border-2 border-sky-500  hover:bg-gradient-to-r from-sky-500 to-violet-400 py-2 px-6 text-sky-500 hover:text-white rounded-full hover:shadow-lg">Back</a>
+</div>
+
+<div class="container w-full py-12">
+    {% if success %}
+    <p class="text-2xl font-capitalize text-emerald-600 w-fit mx-auto mb-5">book will be available to download in 24 working hours</p>
+    {% endif %}
+    <img src="http://127.0.0.1:8000/static/images/gpay-qr.jpg" alt="" class="mx-auto w-1/4 rounded-xl">
+    <div class="w-fit mx-auto my-5 flex gap-10">
+        <!-- <a href="" class="bg-transparent border-2 border-red-500  hover:bg-gradient-to-r from-red-500 to-rose-400 py-2 px-6 text-red-500 hover:text-white rounded-full hover:shadow-lg">Not Paid</a> -->
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Paid" href="" class="bg-transparent border-2 border-lime-500  hover:bg-gradient-to-r from-emerald-500 to-lime-400 py-2 px-6 text-emerald-500 hover:text-white rounded-full hover:shadow-lg" />
+        </form>
+    </div>
+</div>
+
+
+{% include '../components/footer.html' %}

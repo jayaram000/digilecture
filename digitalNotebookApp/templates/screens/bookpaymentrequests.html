@@ -1,0 +1,41 @@
+{% include '../components/header.html' %}
+{% include '../components/usernav.html' %}
+
+
+<div class="container w-100 my-10 px-12">
+    <table class="table-auto w-full text-slate-600">
+        <thead>
+            <tr class="border-b border-white border-collapse text-left">
+                <th class="py-4 px-3">#</th>
+                <th class="py-4 px-3">Book</th>
+                <th class="py-4 px-3">Amount</th>
+                <th class="py-4 px-3">Status</th>
+        </thead>
+        <tbody>
+            {% if not requests %}
+            <tr>
+                <td colspan="4" class="text-center text-slate-600 font-bold text-3xl pt-5">Any purchase requests for your uploaded book will show here and wait for your approval...</td>
+            </tr>
+
+            {% endif %}
+            {% for i in requests %}
+            {% if i.uploadedBy == user.username %}
+            <tr class="border-b border-white border-collapse">
+                <td class="py-4 px-3">{{i.id}}</td>
+                <td class="py-4 px-3">{{i.book}}</td>
+                <td class="py-4 px-3">{{i.amount}}</td>
+                {% if i.approved %}
+                <td class="py-4 px-3"><p class="text-emerald-500 font-semibold">Accepted</p></td>
+                <td class="py-4 px-3"><a href="{% url 'rejectbookpayment' i.id %}" class="bg-gradient-to-r from-red-500 to-red-400 py-2 px-6 text-white rounded-full hover:shadow-lg">Reject</a></td>
+                {% else %}
+                <td class="py-4 px-3"><a href="{% url 'acceptbookpayment' i.id %}" class="bg-gradient-to-r from-emerald-500 to-lime-400 py-2 px-6 text-white rounded-full hover:shadow-lg">Accept</a></td>
+                <td class="py-4 px-3"><p class="text-red-500 font-semibold">Rejected</p></td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include '../components/footer.html' %}
